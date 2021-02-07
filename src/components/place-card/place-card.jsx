@@ -44,7 +44,7 @@ const PlaceCard = (props) => {
 };
 
 PlaceCard.propTypes = {
-  placeCardType: PropTypes.array.isRequired
+  placeCardType: PropTypes.string.isRequired
 };
 
 export default PlaceCard;
