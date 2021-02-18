@@ -1,10 +1,15 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import App from './components/app/app';
-
-const PLACES_COUNT = 312;
+import offers from './mocks/offers';
+import reviews from './mocks/reviews';
+import {CITIES} from './const';
 
 ReactDom.render(
-    <App count={PLACES_COUNT}/>,
+    <App
+      offers={offers}
+      reviews={reviews}
+      cityToStay={CITIES[3]}
+    />,
     document.querySelector(`#root`)
 );
