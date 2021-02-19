@@ -12,11 +12,11 @@ const OfferPage = ({offers, reviews}) => {
   const {id} = useParams();
 
   const offer = offers.find((item) => item.id === id);
-  console.log(offers);
+
 
   const {images, isPremium, isFavorite, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
   const {avatarUrl, name} = host;
-  console.log(offer);
+
   if (!offer) {
     return <Redirect to="/" />;
   }
