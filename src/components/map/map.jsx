@@ -37,11 +37,12 @@ const Map = ({offers}) => {
             icon: customIcon
           })
       .addTo(map);
-
-      return () => {
-        map.remove();
-      };
     });
+
+    return () => {
+      map.remove();
+    };
+
   }, [offers]);
 
   return (
