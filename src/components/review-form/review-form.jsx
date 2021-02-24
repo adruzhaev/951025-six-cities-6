@@ -22,7 +22,7 @@ const ReviewForm = () => {
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {RATING.map(({value, title}) => (
-          <>
+          <React.Fragment key={value}>
             <input
               className="form__rating-input visually-hidden"
               name="rating"
@@ -36,7 +36,7 @@ const ReviewForm = () => {
                 <use xlinkHref="#icon-star" />
               </svg>
             </label>
-          </>
+          </React.Fragment>
         ))}
       </div>
 

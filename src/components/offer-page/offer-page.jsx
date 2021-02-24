@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Redirect, useParams} from 'react-router-dom';
 import Header from '../header';
-import Reviews from '../reviews';
+import ReviewsList from '../reviews-list';
 import PlaceCardComponent from '../place-card';
+import Map from '../map';
 import {capitalize} from '../../utils';
 import {offerPropTypes, reviewPropType} from '../../prop-types';
 
@@ -103,19 +104,27 @@ const OfferPage = ({offers, reviews}) => {
                 </div>
               </div>
 
-              <Reviews reviews={reviews}/>
+              <ReviewsList reviews={reviews}/>
 
             </div>
           </div>
-          <section className="property__map map" />
+          <section className="property__map map">
+            <Map offers={offers.slice(0, 3)}/>
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              {offers.slice(0, 3).map((item, i) => {
-                <PlaceCardComponent key={item + i} isNearest={true} offer={item}/>;
-              })}
+              {offers.slice(0, 3).map((item, i) => (
+                <PlaceCardComponent
+                  key={item + i}
+                  isNearest={true}
+                  offer={item}
+                  id={item.id}
+                />
+              ))}
+
             </div>
           </section>
         </div>

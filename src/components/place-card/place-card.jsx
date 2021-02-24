@@ -64,7 +64,7 @@ PlaceCard.propTypes = {
   isFavoriteCard: PropTypes.bool,
   isNearest: PropTypes.bool,
   offer: PropTypes.object.isRequired,
-  id: PropTypes.string.isRequired
+  id: PropTypes.string
 };
 
 export default PlaceCard;
