@@ -14,7 +14,7 @@ const App = ({cityToStay, offers, reviews}) => {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
-          <MainPage cityToStay={cityToStay} offers={offers.filter((offer) => offer.city.name === cityToStay)} />
+          <MainPage cityToStay={cityToStay} offers={offers.filter((offer) => offer.city.name === cityToStay)}/>
         </Route>
         <Route path="/login" exact>
           <AuthPage />
