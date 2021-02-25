@@ -22,7 +22,6 @@ const OffersList = ({offers}) => {
   return (<div className="cities__places-list places__list tabs__content" onMouseMove={handleMouseEnter} onMouseLeave={handleMouseLeave}>
     {offers.map((offer, i) => (
       <PlaceCardComponent
-        id={offer.id}
         key={offer + i}
         offer={offer}
       />
