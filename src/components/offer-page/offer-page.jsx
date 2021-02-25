@@ -119,7 +119,7 @@ const OfferPage = ({offers, reviews}) => {
               {offers.slice(0, 3).map((item, i) => (
                 <PlaceCardComponent
                   key={item + i}
-                  isNearest={true}
+                  isNearest
                   offer={item}
                 />
               ))}
