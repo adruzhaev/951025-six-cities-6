@@ -121,7 +121,6 @@ const OfferPage = ({offers, reviews}) => {
                   key={item + i}
                   isNearest={true}
                   offer={item}
-                  id={item.id}
                 />
               ))}
 
