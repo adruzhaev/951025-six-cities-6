@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Redirect, useParams} from 'react-router-dom';
+import {connect} from 'react-redux';
 import Header from '../header';
 import ReviewsList from '../reviews-list';
 import PlaceCardComponent from '../place-card';
@@ -138,4 +139,10 @@ OfferPage.propTypes = {
   reviews: PropTypes.arrayOf(reviewPropType).isRequired
 };
 
-export default OfferPage;
+const mapStateToProps = (state) => ({
+  offers: state.offers
+});
+
+export {OfferPage};
+export default connect(mapStateToProps)(OfferPage);
+
