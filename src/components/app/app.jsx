@@ -6,24 +6,24 @@ import AuthPage from '../auth-page';
 import FavouritePlacesPage from '../favourite-places-page';
 import OfferPage from '../offer-page';
 import NotFoundPage from '../not-found-page';
-import {offerPropTypes, reviewPropType} from '../../prop-types';
+import {reviewPropType} from '../../prop-types';
 
-const App = ({cityToStay, offers, reviews}) => {
+const App = ({reviews}) => {
 
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
-          <MainPage cityToStay={cityToStay} offers={offers.filter((offer) => offer.city.name === cityToStay)}/>
+          <MainPage />
         </Route>
         <Route path="/login" exact>
           <AuthPage />
         </Route>
         <Route path="/favorites" exact>
-          <FavouritePlacesPage offers={offers.filter((offer) => offer.isFavorite)}/>
+          <FavouritePlacesPage />
         </Route>
         <Route path="/offer/:id" exact>
-          <OfferPage offers={offers} reviews={reviews}/>
+          <OfferPage reviews={reviews}/>
         </Route>
         <Route>
           <NotFoundPage />
@@ -35,7 +35,6 @@ const App = ({cityToStay, offers, reviews}) => {
 
 App.propTypes = {
   cityToStay: PropTypes.string,
-  offers: PropTypes.arrayOf(offerPropTypes).isRequired,
   reviews: PropTypes.arrayOf(reviewPropType).isRequired,
 };
 
