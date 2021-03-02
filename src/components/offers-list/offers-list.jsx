@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import PlaceCardComponent from '../place-card';
 import {offerPropTypes} from '../../prop-types';
 
-const OffersList = ({offers}) => {
+const OffersList = ({offers, handleOnCardMouseOver, handleCardMouseOut}) => {
 
   const [activeCard, setActiveCard] = useState({});
 
@@ -24,13 +24,17 @@ const OffersList = ({offers}) => {
       <PlaceCardComponent
         key={offer + i}
         offer={offer}
+        handleOnCardMouseOver={handleOnCardMouseOver}
+        handleCardMouseOut={handleCardMouseOut}
       />
     ))}
   </div>);
 };
 
 OffersList.propTypes = {
-  offers: PropTypes.arrayOf(offerPropTypes)
+  offers: PropTypes.arrayOf(offerPropTypes),
+  handleOnCardMouseOver: PropTypes.func.isRequired,
+  handleCardMouseOut: PropTypes.func.isRequired
 };
 
 export default OffersList;

@@ -22,3 +22,10 @@ export const RATING = [
     title: `terribly`,
   },
 ];
+
+export const SortingTypes = {
+  POPULAR: `Popular`,
+  PRICE_DESCENDING: `Price: low to high`,
+  PRICE_ASCENDING: `Price: high to low`,
+  TOP_FIRST: `Top rated first`,
+};
