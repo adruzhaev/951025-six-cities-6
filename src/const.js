@@ -1,4 +1,29 @@
-export const CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+export const CITIES = [
+  {
+    id: 1,
+    city: `Paris`
+  },
+  {
+    id: 2,
+    city: `Cologne`
+  },
+  {
+    id: 3,
+    city: `Brussels`
+  },
+  {
+    id: 4,
+    city: `Amsterdam`
+  },
+  {
+    id: 5,
+    city: `Hamburg`
+  },
+  {
+    id: 6,
+    city: `Dusseldorf`
+  }
+];
 
 export const RATING = [
   {

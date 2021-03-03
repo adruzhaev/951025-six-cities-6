@@ -1,25 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 import {CITIES} from '../../const.js';
-import {v4 as uuidv4} from 'uuid';
 
 const CitiesList = ({activeCity, onCityChangeHandler}) => {
 
   const handleCityClick = (evt) => {
-    evt.preventDefault();
     onCityChangeHandler(evt.target.innerText);
   };
 
   return (
     <ul className="locations__list tabs__list">
       {CITIES.map((city) => (
-        <li className="locations__item" key={uuidv4()}>
-          <Link className={`locations__item-link tabs__item ${activeCity === city ? `tabs__item--active` : ``}`} to="/" onClick={handleCityClick}>
-            <span>{city}</span>
-          </Link>
+        <li className="locations__item" key={city.id} onClick={handleCityClick}>
+          <span className={`locations__item-link tabs__item ${activeCity === city.city ? `tabs__item--active` : ``}`}>{city.city}</span>
         </li>
       ))}
     </ul>

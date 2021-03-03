@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {CITIES} from '../../const';
 
 const MainPageEmpty = ({activeCity}) => {
   return (
@@ -17,7 +16,7 @@ const MainPageEmpty = ({activeCity}) => {
 };
 
 MainPageEmpty.propTypes = {
-  activeCity: PropTypes.oneOf(CITIES).isRequired
+  activeCity: PropTypes.string.isRequired
 };
 
 export default MainPageEmpty;

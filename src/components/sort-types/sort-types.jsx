@@ -14,7 +14,6 @@ const SortTypes = ({activeSorting, onSortTypeChangeHandler}) => {
   };
 
   const handleSortTypeClick = (evt) => {
-    evt.preventDefault();
     onSortTypeChangeHandler(evt.target.innerText);
     setOpenFilter(false);
   };

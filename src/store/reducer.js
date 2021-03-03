@@ -3,7 +3,7 @@ import offers from '../mocks/offers';
 import {CITIES, SortingTypes} from '../const';
 
 const initialState = {
-  activeCity: CITIES[0],
+  activeCity: CITIES[0].city,
   activeSorting: SortingTypes.POPULAR,
   offers,
 };

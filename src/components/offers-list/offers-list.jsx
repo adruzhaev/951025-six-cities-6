@@ -20,9 +20,9 @@ const OffersList = ({offers, handleOnCardMouseOver, handleCardMouseOut}) => {
   };
 
   return (<div className="cities__places-list places__list tabs__content" onMouseMove={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-    {offers.map((offer, i) => (
+    {offers.map((offer) => (
       <PlaceCardComponent
-        key={offer + i}
+        key={offer.id}
         offer={offer}
         handleOnCardMouseOver={handleOnCardMouseOver}
         handleCardMouseOut={handleCardMouseOut}

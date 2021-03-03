@@ -65,8 +65,8 @@ PlaceCard.propTypes = {
   isNearest: PropTypes.bool,
   offer: PropTypes.object.isRequired,
   id: PropTypes.string,
-  handleOnCardMouseOver: PropTypes.func.isRequired,
-  handleCardMouseOut: PropTypes.func.isRequired
+  handleOnCardMouseOver: PropTypes.func,
+  handleCardMouseOut: PropTypes.func
 };
 
 export default PlaceCard;
