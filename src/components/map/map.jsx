@@ -5,12 +5,17 @@ import {offerPropTypes} from '../../prop-types';
 
 import 'leaflet/dist/leaflet.css';
 
-const Map = ({offers}) => {
+const Map = ({offers, activeOffer}) => {
 
   const city = offers[0].city;
 
   const customIcon = leaflet.icon({
     iconUrl: `img/pin.svg`,
+    iconSize: [30, 30]
+  });
+
+  const activeIcon = leaflet.icon({
+    iconUrl: `img/pin-active.svg`,
     iconSize: [30, 30]
   });
 
@@ -31,10 +36,11 @@ const Map = ({offers}) => {
       .addTo(map);
 
     offers.forEach((offer) => {
+      const icon = offer.id === activeOffer ? activeIcon : customIcon;
 
       leaflet.marker([offer.location.latitude, offer.location.longitude],
           {
-            icon: customIcon
+            icon
           })
       .addTo(map);
     });
@@ -42,8 +48,7 @@ const Map = ({offers}) => {
     return () => {
       map.remove();
     };
-
-  }, [offers]);
+  }, [offers, activeOffer]);
 
   return (
     <div id="map" style={{height: `100%`}}></div>
@@ -51,7 +56,8 @@ const Map = ({offers}) => {
 };
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(offerPropTypes).isRequired
+  offers: PropTypes.arrayOf(offerPropTypes).isRequired,
+  activeOffer: PropTypes.string
 };
 
 export default Map;

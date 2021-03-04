@@ -7,17 +7,14 @@ import {CITIES} from '../../const.js';
 const CitiesList = ({activeCity, onCityChangeHandler}) => {
 
   const handleCityClick = (evt) => {
-    evt.preventDefault();
     onCityChangeHandler(evt.target.innerText);
   };
 
   return (
     <ul className="locations__list tabs__list">
-      {CITIES.map((city, index) => (
-        <li className="locations__item" key={city + index}>
-          <a className={`locations__item-link tabs__item ${activeCity === city ? `tabs__item--active` : ``}`} href="#" onClick={handleCityClick}>
-            <span>{city}</span>
-          </a>
+      {CITIES.map((city) => (
+        <li className="locations__item" key={city.id} onClick={handleCityClick}>
+          <span className={`locations__item-link tabs__item ${activeCity === city.city ? `tabs__item--active` : ``}`}>{city.city}</span>
         </li>
       ))}
     </ul>

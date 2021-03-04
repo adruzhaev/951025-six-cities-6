@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {capitalize} from '../../utils';
 
-const PlaceCard = ({isFavoriteCard = false, isNearest = false, offer}) => {
+const PlaceCard = ({isFavoriteCard = false, isNearest = false, offer, handleOnCardMouseOver, handleCardMouseOut}) => {
 
   const {isPremium, previewImage, price, isFavorite, rating, title, type, id} = offer;
 
@@ -21,7 +21,7 @@ const PlaceCard = ({isFavoriteCard = false, isNearest = false, offer}) => {
   };
 
   return (
-    <article className={`place-card ${getPlaceCardClass()}`} data-id={id}>
+    <article className={`place-card ${getPlaceCardClass()}`} data-id={id} onMouseEnter={handleOnCardMouseOver} onMouseLeave={handleCardMouseOut}>
 
       {isPremium && <div className="place-card__mark">
         <span>Premium</span>
@@ -64,7 +64,9 @@ PlaceCard.propTypes = {
   isFavoriteCard: PropTypes.bool,
   isNearest: PropTypes.bool,
   offer: PropTypes.object.isRequired,
-  id: PropTypes.string
+  id: PropTypes.string,
+  handleOnCardMouseOver: PropTypes.func,
+  handleCardMouseOut: PropTypes.func
 };
 
 export default PlaceCard;
