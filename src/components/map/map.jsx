@@ -5,7 +5,7 @@ import {offerPropTypes} from '../../prop-types';
 
 import 'leaflet/dist/leaflet.css';
 
-const Map = ({offers, activeOffer}) => {
+const Map = ({offers, activeOffer = false}) => {
 
   const city = offers[0].city;
 
@@ -36,7 +36,7 @@ const Map = ({offers, activeOffer}) => {
       .addTo(map);
 
     offers.forEach((offer) => {
-      const icon = offer.id === activeOffer ? activeIcon : customIcon;
+      const icon = (offer.id === parseInt(activeOffer, 10)) ? activeIcon : customIcon;
 
       leaflet.marker([offer.location.latitude, offer.location.longitude],
           {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Redirect, useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -6,15 +6,29 @@ import Header from '../header';
 import ReviewsList from '../reviews-list';
 import PlaceCardComponent from '../place-card';
 import Map from '../map';
+import LoadingPage from '../loading-page';
+import {fetchOffer} from '../../store/api-actions';
 import {capitalize} from '../../utils';
 import {offerPropTypes, reviewPropType} from '../../prop-types';
 
-const OfferPage = ({offers, reviews}) => {
+const OfferPage = ({offers, reviews, onLoadOffer, offer, isOfferLoaded}) => {
 
   const {id} = useParams();
 
-  const offer = offers.find((item) => item.id === id);
+  useEffect(() => {
+    if (!isOfferLoaded) {
+      onLoadOffer(id);
+    }
+  }, [isOfferLoaded]);
 
+  if (!isOfferLoaded) {
+    return (
+      <LoadingPage />
+    );
+  }
+
+  // временно, как раньше искал offer
+  //  const offer = offers.find((item) => item.id === id);
 
   const {images, isPremium, isFavorite, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
   const {avatarUrl, name} = host;
@@ -136,13 +150,24 @@ const OfferPage = ({offers, reviews}) => {
 
 OfferPage.propTypes = {
   offers: PropTypes.arrayOf(offerPropTypes).isRequired,
-  reviews: PropTypes.arrayOf(reviewPropType).isRequired
+  reviews: PropTypes.arrayOf(reviewPropType).isRequired,
+  onLoadOffer: PropTypes.func.isRequired,
+  isOfferLoaded: PropTypes.bool.isRequired,
+  offer: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers
+  offers: state.offers,
+  offer: state.offer,
+  isOfferLoaded: state.isOfferLoaded,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadOffer(id) {
+    dispatch(fetchOffer(id));
+  }
 });
 
 export {OfferPage};
-export default connect(mapStateToProps)(OfferPage);
+export default connect(mapStateToProps, mapDispatchToProps)(OfferPage);
 

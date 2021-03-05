@@ -7,14 +7,14 @@ const locationPropType = PropTypes.shape({
 });
 
 const hostPropType = PropTypes.shape({
-  avatarUrl: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  isPro: PropTypes.bool.isRequired,
+  avatarUrl: PropTypes.string,
+  id: PropTypes.number.isRequired,
+  isPro: PropTypes.bool,
   name: PropTypes.string.isRequired
 });
 
 export const offerPropTypes = PropTypes.shape({
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   previewImage: PropTypes.string.isRequired,
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
   price: PropTypes.number.isRequired,
@@ -25,7 +25,7 @@ export const offerPropTypes = PropTypes.shape({
   isFavorite: PropTypes.bool.isRequired,
   isPremium: PropTypes.bool.isRequired,
   bedrooms: PropTypes.number.isRequired,
-  maxAdults: PropTypes.number.isRequired,
+  maxAdults: PropTypes.number,
   goods: PropTypes.arrayOf(PropTypes.string).isRequired,
   host: hostPropType.isRequired,
   city: PropTypes.shape({

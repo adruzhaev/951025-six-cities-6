@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Header from '../header';
@@ -6,17 +6,31 @@ import OffersList from '../offers-list';
 import Map from '../map';
 import CitiesList from '../cities-list';
 import MainPageEmpty from '../main-page-empty';
+import LoadingPage from '../loading-page';
 import SortTypes from '../sort-types';
 import {sortOffers} from '../../utils';
 import {offerPropTypes} from '../../prop-types';
+import {fetchOffersList} from '../../store/api-actions';
 
 const getOffers = (offers, city) => {
   return offers.filter((offer) => offer.city.name === city);
 };
 
-const MainPage = ({activeCity, offers}) => {
+const MainPage = ({activeCity, offers, isDataLoaded, onLoadData}) => {
 
   const [isMouseOverCard, setMouseOverCard] = useState(null);
+
+  useEffect(() => {
+    if (!isDataLoaded) {
+      onLoadData();
+    }
+  }, [isDataLoaded]);
+
+  if (!isDataLoaded) {
+    return (
+      <LoadingPage />
+    );
+  }
 
   const handleMouseOver = (hoveredCard) => {
     setMouseOverCard(hoveredCard.currentTarget.dataset.id);
@@ -69,13 +83,22 @@ const MainPage = ({activeCity, offers}) => {
 
 MainPage.propTypes = {
   activeCity: PropTypes.string,
-  offers: PropTypes.arrayOf(offerPropTypes)
+  offers: PropTypes.arrayOf(offerPropTypes),
+  isDataLoaded: PropTypes.bool.isRequired,
+  onLoadData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   activeCity: state.activeCity,
-  offers: sortOffers(getOffers(state.offers, state.activeCity), state.activeSorting)
+  offers: sortOffers(getOffers(state.offers, state.activeCity), state.activeSorting),
+  isDataLoaded: state.isDataLoaded,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onLoadData() {
+    dispatch(fetchOffersList());
+  }
 });
 
 export {MainPage};
-export default connect(mapStateToProps)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
