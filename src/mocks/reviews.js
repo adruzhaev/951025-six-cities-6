@@ -10,7 +10,7 @@ export default [
     rating: 4,
     user: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: uuidv4(),
+      id: parseInt(uuidv4(), 10),
       isPro: false,
       name: `Max`,
     }
