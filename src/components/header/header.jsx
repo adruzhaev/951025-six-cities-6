@@ -8,7 +8,6 @@ import {authPropType} from '../../prop-types';
 const Header = ({authorizationStatus, authorizationInfo}) => {
 
   const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
-  console.log(isAuthorized);
 
   return (
     <header className="header">
