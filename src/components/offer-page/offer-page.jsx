@@ -16,9 +16,7 @@ const OfferPage = ({offers, reviews, onLoadOffer, offer, isOfferLoaded}) => {
   const {id} = useParams();
 
   useEffect(() => {
-    if (!isOfferLoaded) {
-      onLoadOffer(id);
-    }
+    onLoadOffer(id);
   }, [isOfferLoaded]);
 
   if (!isOfferLoaded) {
@@ -26,9 +24,6 @@ const OfferPage = ({offers, reviews, onLoadOffer, offer, isOfferLoaded}) => {
       <LoadingPage />
     );
   }
-
-  // временно, как раньше искал offer
-  //  const offer = offers.find((item) => item.id === id);
 
   const {images, isPremium, isFavorite, title, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
   const {avatarUrl, name} = host;

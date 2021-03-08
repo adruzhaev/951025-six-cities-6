@@ -8,8 +8,17 @@ import {createAPI} from './services/api';
 import App from './components/app/app';
 import reviews from './mocks/reviews';
 import {reducer} from './store/reducer';
+import {ActionCreator} from './store/action';
+import {AuthorizationStatus, AppRoutes} from './const';
+import {checkAuth} from './store/api-actions';
+import browserHistory from './browser-history';
 
-const api = createAPI();
+const api = createAPI(
+    () => {
+      store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+      browserHistory.push(AppRoutes.LOGIN);
+    }
+);
 
 const store = createStore(
     reducer,
@@ -17,6 +26,8 @@ const store = createStore(
         applyMiddleware(thunk.withExtraArgument(api))
     )
 );
+
+store.dispatch(checkAuth());
 
 ReactDom.render(
     <Provider store={store}>

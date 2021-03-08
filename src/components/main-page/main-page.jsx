@@ -21,9 +21,7 @@ const MainPage = ({activeCity, offers, isDataLoaded, onLoadData}) => {
   const [isMouseOverCard, setMouseOverCard] = useState(null);
 
   useEffect(() => {
-    if (!isDataLoaded) {
-      onLoadData();
-    }
+    onLoadData();
   }, [isDataLoaded]);
 
   if (!isDataLoaded) {
