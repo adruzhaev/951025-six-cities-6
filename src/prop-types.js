@@ -42,3 +42,8 @@ export const reviewPropType = PropTypes.shape({
   rating: PropTypes.number.isRequired,
   user: hostPropType.isRequired,
 });
+
+export const authPropType = PropTypes.shape({
+  email: PropTypes.string,
+  password: PropTypes.string,
+});

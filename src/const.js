@@ -54,3 +54,20 @@ export const SortingTypes = {
   PRICE_ASCENDING: `Price: high to low`,
   TOP_FIRST: `Top rated first`,
 };
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
+export const AppRoutes = {
+  MAIN: `/`,
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`,
+  OFFER: `/offer/:id`,
+};
+
+export const APIRoutes = {
+  OFFERS: `/hotels`,
+  LOGIN: `/login`,
+};

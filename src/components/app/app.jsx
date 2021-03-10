@@ -1,28 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import MainPage from '../main-page';
 import AuthPage from '../auth-page';
 import FavouritePlacesPage from '../favourite-places-page';
 import OfferPage from '../offer-page';
 import NotFoundPage from '../not-found-page';
+import PrivateRoute from '../private-route';
 import {reviewPropType} from '../../prop-types';
+import browserHistory from '../../browser-history.js';
+import {AppRoutes} from '../../const';
 
 const App = ({reviews}) => {
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
-        <Route path="/" exact>
+        <Route path={AppRoutes.MAIN} exact>
           <MainPage />
         </Route>
-        <Route path="/login" exact>
+        <Route path={AppRoutes.LOGIN} exact>
           <AuthPage />
         </Route>
-        <Route path="/favorites" exact>
-          <FavouritePlacesPage />
-        </Route>
-        <Route path="/offer/:id" exact>
+        <PrivateRoute
+          path={AppRoutes.FAVORITES}
+          exact
+          render={() => <FavouritePlacesPage />}
+        />
+        <Route path={AppRoutes.OFFER} exact>
           <OfferPage reviews={reviews}/>
         </Route>
         <Route>
@@ -34,7 +39,6 @@ const App = ({reviews}) => {
 };
 
 App.propTypes = {
-  cityToStay: PropTypes.string,
   reviews: PropTypes.arrayOf(reviewPropType).isRequired,
 };
 
