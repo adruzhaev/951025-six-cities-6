@@ -26,8 +26,7 @@ const App = ({reviews}) => {
           path={AppRoutes.FAVORITES}
           exact
           render={() => <FavouritePlacesPage />}
-        >
-        </PrivateRoute>
+        />
         <Route path={AppRoutes.OFFER} exact>
           <OfferPage reviews={reviews}/>
         </Route>
@@ -40,7 +39,6 @@ const App = ({reviews}) => {
 };
 
 App.propTypes = {
-  cityToStay: PropTypes.string,
   reviews: PropTypes.arrayOf(reviewPropType).isRequired,
 };
 

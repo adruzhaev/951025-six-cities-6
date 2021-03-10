@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -7,23 +7,17 @@ import Header from '../header';
 
 const AuthPage = ({onSubmit}) => {
 
-  const [userForm, setUserForm] = useState({
-    email: ``,
-    password: ``,
-  });
-
-  const handleFieldChange = (evt) => {
-    const {name, value} = evt.target;
-    setUserForm({...userForm, [name]: value});
-  };
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    onSubmit({
-      email: userForm.email,
-      password: userForm.password,
-    });
+    const data = {};
+    const fields = new FormData(evt.target);
+
+    for (let [name, value] of fields.entries()) {
+      data[name] = value;
+    }
+
+    onSubmit(data);
   };
 
   return (
@@ -42,7 +36,6 @@ const AuthPage = ({onSubmit}) => {
                   name="email"
                   id="email"
                   placeholder="Email"
-                  onChange={handleFieldChange}
                   required
                 />
               </div>
@@ -54,7 +47,6 @@ const AuthPage = ({onSubmit}) => {
                   name="password"
                   id="password"
                   placeholder="Password"
-                  onChange={handleFieldChange}
                   required
                 />
               </div>

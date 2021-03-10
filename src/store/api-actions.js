@@ -1,6 +1,6 @@
 import {AuthorizationStatus, APIRoutes, AppRoutes} from '../const';
 import {ActionCreator} from './action';
-import browserHistory from '../browser-history';
+// import browserHistory from '../browser-history';
 
 const adaptToClient = (item) => {
   const adaptedOffer = Object.assign(
@@ -41,13 +41,13 @@ export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoutes.LOGIN)
     .then(({data}) => dispatch(ActionCreator.setAuthorization(data)))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
-    .catch((error) => error)
+    .catch(() => {})
 );
 
 export const login = ({email, password}) => (dispatch, _getState, api) => (
   api.post(APIRoutes.LOGIN, {email, password})
     .then(({data}) => dispatch(ActionCreator.setAuthorization(data)))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
-    .then(() => browserHistory.push(AppRoutes.MAIN))
+    .then(() => dispatch(ActionCreator.redirectToRoute(AppRoutes.MAIN)))
     .catch((error) => error)
 );
