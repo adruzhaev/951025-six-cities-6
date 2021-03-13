@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import Header from '../header';
-import OffersList from '../offers-list';
-import Map from '../map';
-import CitiesList from '../cities-list';
+import Header from '../../components/header';
+import OffersList from '../../components/offers-list';
+import Map from '../../components/map';
+import CitiesList from '../../components/cities-list';
 import MainPageEmpty from '../main-page-empty';
 import LoadingPage from '../loading-page';
-import SortTypes from '../sort-types';
+import SortTypes from '../../components/sort-types';
 import {sortOffers} from '../../utils';
 import {offerPropTypes} from '../../prop-types';
-import {fetchOffersList} from '../../store/api-actions';
+import {fetchOffersList} from '../../store/offer/api-actions';
 
 const getOffers = (offers, city) => {
   return offers.filter((offer) => offer.city.name === city);
@@ -87,9 +87,9 @@ MainPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
-  offers: sortOffers(getOffers(state.offers, state.activeCity), state.activeSorting),
-  isDataLoaded: state.isDataLoaded,
+  activeCity: state.offerReducer.activeCity,
+  offers: sortOffers(getOffers(state.offerReducer.offers, state.offerReducer.activeCity), state.offerReducer.activeSorting),
+  isDataLoaded: state.offerReducer.isDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({

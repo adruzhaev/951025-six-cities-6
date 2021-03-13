@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {offerPropTypes} from '../../prop-types';
-import Header from '../header';
-import Footer from '../footer';
-import PlaceCardComponent from '../place-card';
+import Header from '../../components/header';
+import Footer from '../../components/footer';
+import PlaceCardComponent from '../../components/place-card';
 
 const getFavoriteOffers = (offers) => {
   return offers.filter((offer) => offer.isFavorite);
@@ -61,7 +61,7 @@ FavouritePlacesPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: getFavoriteOffers(state.offers)
+  offers: getFavoriteOffers(state.offerReducer.offers)
 });
 
 export {FavouritePlacesPage};

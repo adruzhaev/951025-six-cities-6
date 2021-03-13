@@ -1,17 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
-import MainPage from '../main-page';
-import AuthPage from '../auth-page';
-import FavouritePlacesPage from '../favourite-places-page';
-import OfferPage from '../offer-page';
-import NotFoundPage from '../not-found-page';
+import MainPage from '../../pages/main-page';
+import AuthPage from '../../pages/auth-page';
+import FavouritePlacesPage from '../../pages/favourite-places-page';
+import OfferPage from '../../pages/offer-page';
+import NotFoundPage from '../../pages/not-found-page';
 import PrivateRoute from '../private-route';
-import {reviewPropType} from '../../prop-types';
 import browserHistory from '../../browser-history.js';
 import {AppRoutes} from '../../const';
 
-const App = ({reviews}) => {
+const App = () => {
 
   return (
     <BrowserRouter history={browserHistory}>
@@ -28,7 +26,7 @@ const App = ({reviews}) => {
           render={() => <FavouritePlacesPage />}
         />
         <Route path={AppRoutes.OFFER} exact>
-          <OfferPage reviews={reviews}/>
+          <OfferPage />
         </Route>
         <Route>
           <NotFoundPage />
@@ -36,10 +34,6 @@ const App = ({reviews}) => {
       </Switch>
     </BrowserRouter>
   );
-};
-
-App.propTypes = {
-  reviews: PropTypes.arrayOf(reviewPropType).isRequired,
 };
 
 export default App;

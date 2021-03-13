@@ -6,11 +6,10 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import {createAPI} from './services/api';
 import App from './components/app/app';
-import reviews from './mocks/reviews';
 import {reducer} from './store/reducer';
-import {ActionCreator} from './store/action';
+import {ActionCreator} from './store/auth/action';
 import {AuthorizationStatus} from './const';
-import {checkAuth} from './store/api-actions';
+import {checkAuth} from './store/auth/api-actions';
 import {redirect} from './store/middlewares/redirect';
 
 const api = createAPI(
@@ -32,9 +31,7 @@ const store = createStore(
 
   ReactDom.render(
       <Provider store={store}>
-        <App
-          reviews={reviews}
-        />
+        <App />
       </Provider>,
       document.querySelector(`#root`)
   );

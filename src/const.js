@@ -60,6 +60,11 @@ export const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`,
 };
 
+export const OfferStatus = {
+  FOUND: `FOUND`,
+  NOT_FOUND: `NOT_FOUND`,
+};
+
 export const AppRoutes = {
   MAIN: `/`,
   LOGIN: `/login`,
@@ -69,5 +74,9 @@ export const AppRoutes = {
 
 export const APIRoutes = {
   OFFERS: `/hotels`,
+  REVIEWS: `/comments`,
   LOGIN: `/login`,
+  LOGOUT: `/logout`,
 };
+
+export const MIN_COMMENTS_CHARS = 50;

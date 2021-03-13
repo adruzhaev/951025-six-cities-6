@@ -3,9 +3,8 @@ export const ActionType = {
   CHANGE_SORTING: `sorting/change`,
   LOAD_OFFERS: `data/loadOffers`,
   LOAD_OFFER: `data/loadOffer`,
-  REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
-  SET_AUTHORIZATION: `user/authInfo`,
-  REDIRECT_TO_ROUTE: `main/redirectToRoute`,
+  NOT_FOUND_OFFER: `offer/notFound`,
+  CLEAN_STATE: `offer/cleanState`,
 };
 
 export const ActionCreator = {
@@ -25,16 +24,10 @@ export const ActionCreator = {
     type: ActionType.LOAD_OFFER,
     payload: offer,
   }),
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
+  notFoundOffer: () => ({
+    type: ActionType.NOT_FOUND_OFFER,
   }),
-  setAuthorization: (info) => ({
-    type: ActionType.SET_AUTHORIZATION,
-    payload: info,
-  }),
-  redirectToRoute: (url) => ({
-    type: ActionType.REDIRECT_TO_ROUTE,
-    payload: url,
+  cleanState: () => ({
+    type: ActionType.CLEAN_STATE,
   })
 };

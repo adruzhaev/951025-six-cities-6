@@ -1,12 +1,13 @@
 import React from 'react';
 import {reviewPropType} from '../../prop-types';
+import dayjs from 'dayjs';
 
 const ReviewItem = ({review}) => {
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src={review.user.avatarUrl} width={54} height={54} alt="Reviews avatar" />
+          <img className="reviews__avatar user__avatar" width={54} height={54} alt="Reviews avatar" src={review.user.avatarUrl} />
         </div>
         <span className="reviews__user-name">
           {review.user.name}
@@ -22,7 +23,7 @@ const ReviewItem = ({review}) => {
         <p className="reviews__text">
           {review.comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+        <time className="reviews__time" dateTime={dayjs(review.date).format(`YYYY-MM-DD`)}>{dayjs(review.date).format(`MMMM YYYY`)}</time>
       </div>
     </li>
   );
