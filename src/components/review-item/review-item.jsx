@@ -1,6 +1,5 @@
 import React from 'react';
 import {reviewPropType} from '../../prop-types';
-import dayjs from 'dayjs';
 
 const ReviewItem = ({review}) => {
   return (
@@ -23,7 +22,7 @@ const ReviewItem = ({review}) => {
         <p className="reviews__text">
           {review.comment}
         </p>
-        <time className="reviews__time" dateTime={dayjs(review.date).format(`YYYY-MM-DD`)}>{dayjs(review.date).format(`MMMM YYYY`)}</time>
+        <time className="reviews__time" dateTime={review.date.format(`YYYY-MM-DD`)}>{review.date.format(`MMMM YYYY`)}</time>
       </div>
     </li>
   );

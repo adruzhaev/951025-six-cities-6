@@ -44,7 +44,7 @@ SortTypes.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeSorting: state.offerReducer.activeSorting,
+  activeSorting: state.offer.activeSorting,
 });
 
 const mapDispatchToProps = (dispatch) => ({

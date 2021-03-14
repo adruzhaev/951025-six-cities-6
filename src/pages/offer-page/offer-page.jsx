@@ -88,11 +88,11 @@ OfferPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offerReducer.offers,
-  offer: state.offerReducer.offer,
-  reviews: state.reviewsReducer.reviews,
-  notFoundOffer: state.offerReducer.notFoundOffer,
-  authorizationStatus: state.authReducer.authorizationStatus,
+  offers: state.offer.offers,
+  offer: state.offer.offer,
+  reviews: state.reviews.reviews,
+  notFoundOffer: state.offer.notFoundOffer,
+  authorizationStatus: state.auth.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({

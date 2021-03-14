@@ -24,9 +24,7 @@ const ReviewForm = ({id, onSubmit}) => {
   };
 
   const handleTextTypeChange = (evt) => {
-    if (evt.target.value.length > MIN_COMMENTS_CHARS) {
-      setDisabled(false);
-    }
+    return evt.target.value.length > MIN_COMMENTS_CHARS ? setDisabled(false) : setDisabled(true);
   };
 
   return (

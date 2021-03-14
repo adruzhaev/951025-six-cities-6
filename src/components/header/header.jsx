@@ -43,8 +43,8 @@ Header.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: state.authReducer.authorizationStatus,
-  authorizationInfo: state.authReducer.authorizationInfo
+  authorizationStatus: state.auth.authorizationStatus,
+  authorizationInfo: state.auth.authorizationInfo
 });
 
 export {Header};

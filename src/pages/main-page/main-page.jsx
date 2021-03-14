@@ -87,9 +87,9 @@ MainPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.offerReducer.activeCity,
-  offers: sortOffers(getOffers(state.offerReducer.offers, state.offerReducer.activeCity), state.offerReducer.activeSorting),
-  isDataLoaded: state.offerReducer.isDataLoaded,
+  activeCity: state.offer.activeCity,
+  offers: sortOffers(getOffers(state.offer.offers, state.offer.activeCity), state.offer.activeSorting),
+  isDataLoaded: state.offer.isDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -61,7 +61,7 @@ FavouritePlacesPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: getFavoriteOffers(state.offerReducer.offers)
+  offers: getFavoriteOffers(state.offer.offers)
 });
 
 export {FavouritePlacesPage};

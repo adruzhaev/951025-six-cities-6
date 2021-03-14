@@ -1,8 +1,11 @@
+import dayjs from 'dayjs';
+
 export const adaptReviewToClient = (review) => {
   const adaptedReview = Object.assign(
       {},
       review,
       {
+        date: dayjs(review.date),
         user: {
           ...review.user,
           avatarUrl: review.user.avatar_url,
