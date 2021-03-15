@@ -5,6 +5,7 @@ import {offerPropTypes} from '../../prop-types';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import PlaceCardComponent from '../../components/place-card';
+import {getOffers} from '../../store/offer/selectors';
 
 const getFavoriteOffers = (offers) => {
   return offers.filter((offer) => offer.isFavorite);
@@ -61,7 +62,7 @@ FavouritePlacesPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: getFavoriteOffers(state.offer.offers)
+  offers: getFavoriteOffers(getOffers(state))
 });
 
 export {FavouritePlacesPage};

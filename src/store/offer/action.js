@@ -7,27 +7,30 @@ export const ActionType = {
   CLEAN_STATE: `offer/cleanState`,
 };
 
-export const ActionCreator = {
-  changeCity: (city) => ({
-    type: ActionType.CHANGE_CITY,
-    payload: city,
-  }),
-  changeSorting: (sortingType) => ({
-    type: ActionType.CHANGE_SORTING,
-    payload: sortingType,
-  }),
-  loadOffers: (offers) => ({
-    type: ActionType.LOAD_OFFERS,
-    payload: offers,
-  }),
-  loadOffer: (offer) => ({
-    type: ActionType.LOAD_OFFER,
-    payload: offer,
-  }),
-  notFoundOffer: () => ({
-    type: ActionType.NOT_FOUND_OFFER,
-  }),
-  cleanState: () => ({
-    type: ActionType.CLEAN_STATE,
-  })
-};
+export const changeCity = (city) => ({
+  type: ActionType.CHANGE_CITY,
+  payload: city,
+});
+
+export const changeSorting = (sortingType) => ({
+  type: ActionType.CHANGE_SORTING,
+  payload: sortingType,
+});
+
+export const loadOffers = (offers) => ({
+  type: ActionType.LOAD_OFFERS,
+  payload: offers,
+});
+
+export const loadOffer = (offer) => ({
+  type: ActionType.LOAD_OFFER,
+  payload: offer,
+});
+
+export const notFoundOffer = () => ({
+  type: ActionType.NOT_FOUND_OFFER,
+});
+
+export const cleanState = () => ({
+  type: ActionType.CLEAN_STATE,
+});

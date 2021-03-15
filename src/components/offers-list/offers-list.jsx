@@ -37,4 +37,6 @@ OffersList.propTypes = {
   handleCardMouseOut: PropTypes.func.isRequired
 };
 
-export default OffersList;
+export default React.memo(OffersList, (prev, next) => {
+  return prev.offers === next.offers;
+});
