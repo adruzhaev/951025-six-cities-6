@@ -37,8 +37,8 @@ export const offerPropTypes = PropTypes.shape({
 
 export const reviewPropType = PropTypes.shape({
   comment: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  date: PropTypes.obj,
+  id: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,
   user: hostPropType.isRequired,
 });

@@ -2,8 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {login} from '../../store/api-actions';
-import Header from '../header';
+import {login} from '../../store/auth/api-actions';
+import Header from '../../components/header';
 
 const AuthPage = ({onSubmit}) => {
 
