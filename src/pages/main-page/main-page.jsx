@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Header from '../../components/header';
@@ -16,6 +16,14 @@ const MainPage = ({activeCity, offers, isDataLoaded, onLoadData}) => {
 
   const [isMouseOverCard, setMouseOverCard] = useState(null);
 
+  const handleMouseOver = useCallback((evt) => {
+    setMouseOverCard(evt.currentTarget.dataset.id);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setMouseOverCard(null);
+  }, []);
+
   useEffect(() => {
     onLoadData();
   }, [isDataLoaded]);
@@ -25,14 +33,6 @@ const MainPage = ({activeCity, offers, isDataLoaded, onLoadData}) => {
       <LoadingPage />
     );
   }
-
-  const handleMouseOver = (hoveredCard) => {
-    setMouseOverCard(hoveredCard.currentTarget.dataset.id);
-  };
-
-  const handleMouseLeave = () => {
-    setMouseOverCard(null);
-  };
 
   return (
     <div className="page page--gray page--main">
