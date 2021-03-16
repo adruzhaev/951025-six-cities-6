@@ -37,4 +37,4 @@ OffersList.propTypes = {
   handleCardMouseOut: PropTypes.func.isRequired
 };
 
-export default OffersList;
+export default React.memo(OffersList);

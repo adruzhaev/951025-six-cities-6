@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {SortingTypes} from '../../const';
-import {ActionCreator} from '../../store/offer/action';
-import {v4 as uuidv4} from 'uuid';
+import {changeSorting} from '../../store/offer/action';
+import {getActiveSorting} from '../../store/offer/selectors';
 
 const SortTypes = ({activeSorting, onSortTypeChangeHandler}) => {
 
@@ -30,7 +30,7 @@ const SortTypes = ({activeSorting, onSortTypeChangeHandler}) => {
       <ul className={`places__options places__options--custom ${isOpenFilter && `places__options--opened `}`} >
         {Object.values(SortingTypes).map((value) => {
           return (
-            <li className={`places__option ${activeSorting === value ? `places__option--active` : ``}`} tabIndex={0} key={uuidv4()} onClick={handleSortTypeClick}>{value}</li>
+            <li className={`places__option ${activeSorting === value ? `places__option--active` : ``}`} tabIndex={0} key={value} onClick={handleSortTypeClick}>{value}</li>
           );
         })}
       </ul>
@@ -44,12 +44,12 @@ SortTypes.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeSorting: state.offer.activeSorting,
+  activeSorting: getActiveSorting(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onSortTypeChangeHandler(sortType) {
-    dispatch(ActionCreator.changeSorting(sortType));
+    dispatch(changeSorting(sortType));
   }
 });
 

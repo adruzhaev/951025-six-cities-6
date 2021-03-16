@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {AuthorizationStatus, AppRoutes} from '../../const';
 import {authPropType} from '../../prop-types';
+import {getAuthorizationStatus, getAuthorizationInfo} from '../../store/auth/selectors';
 
 const Header = ({authorizationStatus, authorizationInfo}) => {
 
@@ -43,8 +44,8 @@ Header.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: state.auth.authorizationStatus,
-  authorizationInfo: state.auth.authorizationInfo
+  authorizationStatus: getAuthorizationStatus(state),
+  authorizationInfo: getAuthorizationInfo(state)
 });
 
 export {Header};

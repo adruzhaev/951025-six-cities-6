@@ -15,7 +15,10 @@ import {fetchOffer} from '../../store/offer/api-actions';
 import {fetchReviewsList} from '../../store/reviews/api-actions';
 import {offerPropTypes, reviewPropType} from '../../prop-types';
 import {AuthorizationStatus, OfferStatus} from '../../const';
-import {ActionCreator} from '../../store/offer/action';
+import {cleanState} from '../../store/offer/action';
+import {getAuthorizationStatus} from '../../store/auth/selectors';
+import {getReviews} from '../../store/reviews/selectors';
+import {getOffers, getOffer, getNotFoundOffer} from '../../store/offer/selectors';
 
 const OfferPage = ({offers, reviews, offer, onLoadOffer, notFoundOffer, authorizationStatus, unmount}) => {
 
@@ -88,11 +91,11 @@ OfferPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offer.offers,
-  offer: state.offer.offer,
-  reviews: state.reviews.reviews,
-  notFoundOffer: state.offer.notFoundOffer,
-  authorizationStatus: state.auth.authorizationStatus,
+  offers: getOffers(state),
+  offer: getOffer(state),
+  reviews: getReviews(state),
+  notFoundOffer: getNotFoundOffer(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -101,7 +104,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchReviewsList(id));
   },
   unmount() {
-    dispatch(ActionCreator.cleanState());
+    dispatch(cleanState());
   }
 });
 

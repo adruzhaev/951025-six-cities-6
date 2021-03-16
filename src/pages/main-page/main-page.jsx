@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Header from '../../components/header';
@@ -8,17 +8,21 @@ import CitiesList from '../../components/cities-list';
 import MainPageEmpty from '../main-page-empty';
 import LoadingPage from '../loading-page';
 import SortTypes from '../../components/sort-types';
-import {sortOffers} from '../../utils';
 import {offerPropTypes} from '../../prop-types';
 import {fetchOffersList} from '../../store/offer/api-actions';
-
-const getOffers = (offers, city) => {
-  return offers.filter((offer) => offer.city.name === city);
-};
+import {getActiveCity, getLoadDataStatus, getSortedOffers} from '../../store/offer/selectors';
 
 const MainPage = ({activeCity, offers, isDataLoaded, onLoadData}) => {
 
   const [isMouseOverCard, setMouseOverCard] = useState(null);
+
+  const handleMouseOver = useCallback((evt) => {
+    setMouseOverCard(evt.currentTarget.dataset.id);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setMouseOverCard(null);
+  }, []);
 
   useEffect(() => {
     onLoadData();
@@ -29,14 +33,6 @@ const MainPage = ({activeCity, offers, isDataLoaded, onLoadData}) => {
       <LoadingPage />
     );
   }
-
-  const handleMouseOver = (hoveredCard) => {
-    setMouseOverCard(hoveredCard.currentTarget.dataset.id);
-  };
-
-  const handleMouseLeave = () => {
-    setMouseOverCard(null);
-  };
 
   return (
     <div className="page page--gray page--main">
@@ -87,9 +83,9 @@ MainPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.offer.activeCity,
-  offers: sortOffers(getOffers(state.offer.offers, state.offer.activeCity), state.offer.activeSorting),
-  isDataLoaded: state.offer.isDataLoaded,
+  activeCity: getActiveCity(state),
+  offers: getSortedOffers(state),
+  isDataLoaded: getLoadDataStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
