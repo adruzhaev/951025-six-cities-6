@@ -1,5 +1,5 @@
 import {APIRoutes} from '../../const';
-import {loadOffers, loadOffer, notFoundOffer} from './action';
+import {loadOffers, loadOffer, notFoundOffer, loadOffersNearby} from './action';
 import {adaptOfferToClient} from '../../services/adapter';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
@@ -15,4 +15,10 @@ export const fetchOffer = (id) => (dispatch, _getState, api) => (
         dispatch(notFoundOffer());
       }
     })
+);
+
+export const fetchOffersNearby = (id) => (dispatch, _getState, api) => (
+  api.get(APIRoutes.OFFERS + `/` + id + `/nearby`)
+    .then(({data}) => dispatch(loadOffersNearby(data.map((item) => adaptOfferToClient(item)))))
+    .catch(() => {})
 );

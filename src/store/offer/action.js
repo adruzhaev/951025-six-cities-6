@@ -3,6 +3,7 @@ export const ActionType = {
   CHANGE_SORTING: `sorting/change`,
   LOAD_OFFERS: `data/loadOffers`,
   LOAD_OFFER: `data/loadOffer`,
+  LOAD_OFFERS_NEARBY: `data/loadOffersNearby`,
   NOT_FOUND_OFFER: `offer/notFound`,
   CLEAN_STATE: `offer/cleanState`,
 };
@@ -25,6 +26,11 @@ export const loadOffers = (offers) => ({
 export const loadOffer = (offer) => ({
   type: ActionType.LOAD_OFFER,
   payload: offer,
+});
+
+export const loadOffersNearby = (offers) => ({
+  type: ActionType.LOAD_OFFERS_NEARBY,
+  payload: offers,
 });
 
 export const notFoundOffer = () => ({
