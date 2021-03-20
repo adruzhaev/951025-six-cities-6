@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {offerPropTypes} from '../../prop-types';
+import BookmarkButton from '../bookmark-button';
 import {capitalize} from '../../utils';
+import {BOOK_MARK_ICON, BOOK_MARK_CLASSES} from '../../const';
 
 const OfferParts = ({offer, children}) => {
   return (
@@ -15,12 +17,9 @@ const OfferParts = ({offer, children}) => {
           <h1 className="property__name">
             {offer.title}
           </h1>
-          <button className={`property__bookmark-button button ${offer.isFavorite ? `property__bookmark-button--active` : ``}`} type="button">
-            <svg className="property__bookmark-icon" width={31} height={33}>
-              <use xlinkHref="#icon-bookmark" />
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+
+          <BookmarkButton offer={offer} width={BOOK_MARK_ICON.OFFER.WIDTH} height={BOOK_MARK_ICON.OFFER.HEIGHT} className={BOOK_MARK_CLASSES.OFFER}/>
+
         </div>
         <div className="property__rating rating">
           <div className="property__stars rating__stars">

@@ -11,16 +11,16 @@ import NotFoundPage from '../not-found-page';
 import ReviewForm from '../../components/review-form';
 import OfferGallery from '../../components/offer-gallery';
 import OfferParts from '../../components/offer-parts';
-import {fetchOffer} from '../../store/offer/api-actions';
+import {fetchOffer, fetchOffersNearby} from '../../store/offer/api-actions';
 import {fetchReviewsList} from '../../store/reviews/api-actions';
 import {offerPropTypes, reviewPropType} from '../../prop-types';
 import {AuthorizationStatus, OfferStatus} from '../../const';
 import {cleanState} from '../../store/offer/action';
 import {getAuthorizationStatus} from '../../store/auth/selectors';
 import {getReviews} from '../../store/reviews/selectors';
-import {getOffers, getOffer, getNotFoundOffer} from '../../store/offer/selectors';
+import {getOffers, getOffer, getNotFoundOffer, getOffersNearby} from '../../store/offer/selectors';
 
-const OfferPage = ({offers, reviews, offer, onLoadOffer, notFoundOffer, authorizationStatus, unmount}) => {
+const OfferPage = ({offers, offersNearby, offer, reviews, onLoadOffer, notFoundOffer, authorizationStatus, unmount}) => {
 
   const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
 
@@ -55,7 +55,7 @@ const OfferPage = ({offers, reviews, offer, onLoadOffer, notFoundOffer, authoriz
             </OfferParts>
 
             <section className="property__map map">
-              <Map offers={offers.slice(0, 3)}/>
+              <Map offers={offers}/>
             </section>
           </section>
 
@@ -63,7 +63,7 @@ const OfferPage = ({offers, reviews, offer, onLoadOffer, notFoundOffer, authoriz
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                {offers.slice(0, 3).map((item) => (
+                {offersNearby.map((item) => (
                   <PlaceCardComponent
                     key={item.id}
                     isNearest
@@ -82,6 +82,7 @@ const OfferPage = ({offers, reviews, offer, onLoadOffer, notFoundOffer, authoriz
 
 OfferPage.propTypes = {
   offers: PropTypes.arrayOf(offerPropTypes).isRequired,
+  offersNearby: PropTypes.arrayOf(offerPropTypes).isRequired,
   reviews: PropTypes.arrayOf(reviewPropType).isRequired,
   onLoadOffer: PropTypes.func.isRequired,
   offer: PropTypes.object,
@@ -92,6 +93,7 @@ OfferPage.propTypes = {
 
 const mapStateToProps = (state) => ({
   offers: getOffers(state),
+  offersNearby: getOffersNearby(state),
   offer: getOffer(state),
   reviews: getReviews(state),
   notFoundOffer: getNotFoundOffer(state),
@@ -102,6 +104,7 @@ const mapDispatchToProps = (dispatch) => ({
   onLoadOffer(id) {
     dispatch(fetchOffer(id));
     dispatch(fetchReviewsList(id));
+    dispatch(fetchOffersNearby(id));
   },
   unmount() {
     dispatch(cleanState());

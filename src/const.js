@@ -77,6 +77,23 @@ export const APIRoutes = {
   REVIEWS: `/comments`,
   LOGIN: `/login`,
   LOGOUT: `/logout`,
+  FAVORITES: `/favorite`,
 };
 
 export const MIN_COMMENTS_CHARS = 50;
+
+export const BOOK_MARK_ICON = {
+  MAIN: {
+    WIDTH: 18,
+    HEIGHT: 19,
+  },
+  OFFER: {
+    WIDTH: 31,
+    HEIGHT: 33,
+  }
+};
+
+export const BOOK_MARK_CLASSES = {
+  MAIN: `place-card__`,
+  OFFER: `property__`
+};

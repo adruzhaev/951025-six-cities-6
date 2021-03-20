@@ -8,6 +8,11 @@ export const getActiveSorting = (state) => state[NameSpace.OFFER].activeSorting;
 
 export const getOffers = (state) => state[NameSpace.OFFER].offers;
 
+export const getOffersNearby = (state) => state[NameSpace.OFFER].offersNearby;
+// {
+//   return state[NameSpace.OFFER].offers.filter((item) => state[NameSpace.OFFER].offersNearby.includes(item.id));
+// };
+
 export const getOffer = (state) => state[NameSpace.OFFER].offer;
 
 export const getLoadDataStatus = (state) => state[NameSpace.OFFER].isDataLoaded;
