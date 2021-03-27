@@ -11,5 +11,5 @@ export const fetchReviewsList = (id) => (dispatch, _getState, api) => {
 export const sendReviewForm = ({id, review}) => (dispatch, _getState, api) => {
   api.post(APIRoutes.REVIEWS + `/` + id, review)
     .then(({data}) => dispatch(loadReviews(data.map((item) => adaptReviewToClient(item)))))
-    .catch(() => {});
+    .catch();
 };

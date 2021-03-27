@@ -1,6 +1,6 @@
 export const ActionType = {
-  REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
-  SET_AUTHORIZATION: `user/authInfo`,
+  REQUIRED_AUTHORIZATION: `auth/requiredAuthorization`,
+  SET_AUTHORIZATION: `auth/authInfo`,
 };
 
 export const requireAuthorization = (status) => ({

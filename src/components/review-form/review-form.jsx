@@ -1,30 +1,36 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {RATING, MIN_COMMENTS_CHARS} from '../../const';
+import {RATING, MIN_COMMENTS_CHARS, MAX_COMMENTS_CHARS} from '../../const';
 import {sendReviewForm} from '../../store/reviews/api-actions.js';
 
 const ReviewForm = ({id, onSubmit}) => {
 
   const [disabled, setDisabled] = useState(true);
+  const initialComment = {
+    'rating': 0,
+    'comment': ``,
+  };
+  const [commentForm, setCommentForm] = useState(initialComment);
+
+  useEffect(() => {
+    setDisabled(!commentForm.rating
+      || commentForm.comment.length < MIN_COMMENTS_CHARS
+      || commentForm.comment.length > MAX_COMMENTS_CHARS
+    );
+  });
+
+  const handleFieldChange = (evt) => {
+    const {name, value} = evt.target;
+    setCommentForm({...commentForm, [name]: value});
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-
-    let data = {};
-    const fields = new FormData(evt.target);
-
-    for (let [name, value] of fields.entries()) {
-      data[name] = value;
-    }
-
-    onSubmit({id, review: data});
+    onSubmit({id, review: commentForm});
+    setCommentForm({...commentForm, ...initialComment});
     evt.target.reset();
     setDisabled(true);
-  };
-
-  const handleTextTypeChange = (evt) => {
-    return evt.target.value.length > MIN_COMMENTS_CHARS ? setDisabled(false) : setDisabled(true);
   };
 
   return (
@@ -39,6 +45,7 @@ const ReviewForm = ({id, onSubmit}) => {
               value={value}
               id={`${value}-stars`}
               type="radio"
+              onChange={handleFieldChange}
             />
             <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={title}>
               <svg className="form__star-image" width={37} height={33}>
@@ -54,7 +61,7 @@ const ReviewForm = ({id, onSubmit}) => {
         id="comment"
         name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={handleTextTypeChange}
+        onChange={handleFieldChange}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -72,8 +79,8 @@ ReviewForm.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit({id, review}) {
-    dispatch(sendReviewForm({id, review}));
+  onSubmit({id, review, element}) {
+    dispatch(sendReviewForm({id, review, element}));
   }
 });
 

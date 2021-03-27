@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BookmarkButton should render correctly 1`] = `
+<div>
+  <button
+    class="button undefinedbookmark-button "
+    type="button"
+  >
+    <svg
+      class="undefinedbookmark-icon"
+    >
+      <use
+        xlink:href="#icon-bookmark"
+      />
+    </svg>
+    <span
+      class="visually-hidden"
+    >
+      To bookmarks
+    </span>
+  </button>
+</div>
+`;

@@ -21,7 +21,7 @@ const AuthForm = ({onSubmit}) => {
   return (
     <form className="login__form form" action="#" method="post" onSubmit={handleSubmit}>
       <div className="login__input-wrapper form__input-wrapper">
-        <label className="visually-hidden">E-mail</label>
+        <label className="visually-hidden" htmlFor="email">E-mail</label>
         <input
           className="login__input form__input"
           type="email"
@@ -32,7 +32,7 @@ const AuthForm = ({onSubmit}) => {
         />
       </div>
       <div className="login__input-wrapper form__input-wrapper">
-        <label className="visually-hidden">Password</label>
+        <label className="visually-hidden" htmlFor="password">Password</label>
         <input
           className="login__input form__input"
           type="password"

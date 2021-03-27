@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import PropTypes from 'prop-types';
 import {useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -20,11 +20,12 @@ import {getAuthorizationStatus} from '../../store/auth/selectors';
 import {getReviews} from '../../store/reviews/selectors';
 import {getOffers, getOffer, getNotFoundOffer, getOffersNearby} from '../../store/offer/selectors';
 
-const OfferPage = ({offers, offersNearby, offer, reviews, onLoadOffer, notFoundOffer, authorizationStatus, unmount}) => {
-
+const OfferPage = ({offersNearby, offer, reviews, onLoadOffer, notFoundOffer, authorizationStatus, unmount}) => {
   const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
 
   const {id} = useParams();
+
+  const arr = useMemo(() => [offer, ...offersNearby], [offer, offersNearby]);
 
   useEffect(() => {
     onLoadOffer(id);
@@ -55,7 +56,7 @@ const OfferPage = ({offers, offersNearby, offer, reviews, onLoadOffer, notFoundO
             </OfferParts>
 
             <section className="property__map map">
-              <Map offers={offers}/>
+              <Map offers={arr} activeOfferId={id} />
             </section>
           </section>
 
@@ -81,7 +82,6 @@ const OfferPage = ({offers, offersNearby, offer, reviews, onLoadOffer, notFoundO
 };
 
 OfferPage.propTypes = {
-  offers: PropTypes.arrayOf(offerPropTypes).isRequired,
   offersNearby: PropTypes.arrayOf(offerPropTypes).isRequired,
   reviews: PropTypes.arrayOf(reviewPropType).isRequired,
   onLoadOffer: PropTypes.func.isRequired,

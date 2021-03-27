@@ -1,5 +1,5 @@
 import {ActionType} from './action';
-import {ActionType as ActionType2} from '../favorites/action';
+import {ActionType as ActionTypeFavorite} from '../favorites/action';
 import {CITIES, SortingTypes, OfferStatus} from '../../const';
 
 const initialState = {
@@ -30,8 +30,8 @@ const reducer = (state = initialState, action) => {
         offers: action.payload,
         isDataLoaded: true,
       };
-    case ActionType2.ADD_FAVORITE:
-    case ActionType2.REMOVE_FAVORITE:
+    case ActionTypeFavorite.ADD_FAVORITE:
+    case ActionTypeFavorite.REMOVE_FAVORITE:
       return {
         ...state,
         offer: (state.offer && state.offer.id) === action.payload.id ? {...state.offer, isFavorite: !state.offer.isFavorite} : state.offer,
