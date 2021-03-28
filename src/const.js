@@ -48,6 +48,39 @@ export const RATING = [
   },
 ];
 
+export const Coordinates = {
+  [CITIES[0].city]: {
+    latitude: 48.85661,
+    longitude: 2.351499,
+    zoom: 13
+  },
+  [CITIES[1].city]: {
+    latitude: 50.938361,
+    longitude: 6.959974,
+    zoom: 13
+  },
+  [CITIES[2].city]: {
+    latitude: 50.846557,
+    longitude: 4.351697,
+    zoom: 13
+  },
+  [CITIES[3].city]: {
+    latitude: 52.37454,
+    longitude: 4.897976,
+    zoom: 13
+  },
+  [CITIES[4].city]: {
+    latitude: 53.550341,
+    longitude: 10.000654,
+    zoom: 13
+  },
+  [CITIES[5].city]: {
+    latitude: 51.225402,
+    longitude: 6.776314,
+    zoom: 13
+  }
+};
+
 export const SortingTypes = {
   POPULAR: `Popular`,
   PRICE_DESCENDING: `Price: low to high`,
@@ -81,6 +114,7 @@ export const APIRoutes = {
 };
 
 export const MIN_COMMENTS_CHARS = 50;
+export const MAX_COMMENTS_CHARS = 300;
 
 export const BOOK_MARK_ICON = {
   MAIN: {
@@ -96,4 +130,9 @@ export const BOOK_MARK_ICON = {
 export const BOOK_MARK_CLASSES = {
   MAIN: `place-card__`,
   OFFER: `property__`
+};
+
+export const REVIEWS_TO_SHOW = {
+  MIN: 0,
+  MAX: 10,
 };

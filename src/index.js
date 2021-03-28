@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
+import {Router as BrowserRouter} from 'react-router-dom';
+import browserHistory from './browser-history';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import {createAPI} from './services/api';
@@ -31,7 +33,9 @@ const store = createStore(
 
   ReactDom.render(
       <Provider store={store}>
-        <App />
+        <BrowserRouter history={browserHistory}>
+          <App />
+        </BrowserRouter>
       </Provider>,
       document.querySelector(`#root`)
   );

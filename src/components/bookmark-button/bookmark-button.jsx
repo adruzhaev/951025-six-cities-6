@@ -40,9 +40,9 @@ BookmarkButton.propTypes = {
   offer: offerPropTypes,
   authorizationStatus: PropTypes.string,
   onBookmarkButtonClick: PropTypes.func,
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  className: PropTypes.string.isRequired,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  className: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({

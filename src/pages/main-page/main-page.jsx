@@ -14,14 +14,14 @@ import {getActiveCity, getLoadDataStatus, getSortedOffers} from '../../store/off
 
 const MainPage = ({activeCity, offers, isDataLoaded, onLoadData}) => {
 
-  const [isMouseOverCard, setMouseOverCard] = useState(null);
+  const [offerCardId, setofferCardId] = useState(null);
 
   const handleMouseOver = useCallback((evt) => {
-    setMouseOverCard(evt.currentTarget.dataset.id);
+    setofferCardId(evt.currentTarget.dataset.id);
   }, []);
 
   const handleMouseLeave = useCallback(() => {
-    setMouseOverCard(null);
+    setofferCardId(null);
   }, []);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const MainPage = ({activeCity, offers, isDataLoaded, onLoadData}) => {
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <Map offers={offers} activeOffer={isMouseOverCard}/>
+                  <Map offers={offers} activeOfferId={offerCardId}/>
                 </section>
               </div>
             </div> :

@@ -5,7 +5,7 @@ import {offerPropTypes} from '../../prop-types';
 
 import 'leaflet/dist/leaflet.css';
 
-const Map = ({offers, activeOffer = false}) => {
+const Map = ({offers, activeOfferId}) => {
 
   const city = offers[0].city;
 
@@ -36,7 +36,7 @@ const Map = ({offers, activeOffer = false}) => {
       .addTo(map);
 
     offers.forEach((offer) => {
-      const icon = (offer.id === parseInt(activeOffer, 10)) ? activeIcon : customIcon;
+      const icon = (offer.id === parseInt(activeOfferId, 10)) ? activeIcon : customIcon;
 
       leaflet.marker([offer.location.latitude, offer.location.longitude],
           {
@@ -48,7 +48,7 @@ const Map = ({offers, activeOffer = false}) => {
     return () => {
       map.remove();
     };
-  }, [offers, activeOffer]);
+  }, [offers, activeOfferId]);
 
   return (
     <div id="map" style={{height: `100%`}}></div>
@@ -57,7 +57,7 @@ const Map = ({offers, activeOffer = false}) => {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(offerPropTypes).isRequired,
-  activeOffer: PropTypes.string
+  activeOfferId: PropTypes.string,
 };
 
 export default Map;

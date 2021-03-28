@@ -31,7 +31,8 @@ export const adaptOfferToClient = (item) => {
         maxAdults: item.max_adults,
         host: {
           ...item.host,
-          avatarUrl: item.host.avatar_url
+          avatarUrl: item.host.avatar_url,
+          isPro: item.host.is_pro,
         }
       }
   );
@@ -41,6 +42,7 @@ export const adaptOfferToClient = (item) => {
   delete adaptedOffer.is_premium;
   delete adaptedOffer.max_adults;
   delete adaptedOffer.host.avatar_url;
+  delete adaptedOffer.host.is_pro;
 
   return adaptedOffer;
 };
