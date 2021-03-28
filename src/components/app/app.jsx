@@ -1,5 +1,7 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import {Switch, Route, Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
 import MainPage from '../../pages/main-page';
 import AuthPage from '../../pages/auth-page';
 import FavouritePlacesPage from '../../pages/favourite-places-page';
@@ -7,16 +9,16 @@ import OfferPage from '../../pages/offer-page';
 import NotFoundPage from '../../pages/not-found-page';
 import PrivateRoute from '../private-route';
 import {AppRoutes} from '../../const';
+import {getAuthorizationStatus} from '../../store/auth/selectors';
 
-const App = () => {
-
+const App = ({authorizationStatus}) => {
   return (
     <Switch>
       <Route path={AppRoutes.MAIN} exact>
         <MainPage />
       </Route>
       <Route path={AppRoutes.LOGIN} exact>
-        <AuthPage />
+        {authorizationStatus === `NO_AUTH` ? <AuthPage /> : <Redirect to={`/`}/>}
       </Route>
       <PrivateRoute
         path={AppRoutes.FAVORITES}
@@ -33,4 +35,12 @@ const App = () => {
   );
 };
 
-export default App;
+App.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+});
+
+export default connect(mapStateToProps)(App);

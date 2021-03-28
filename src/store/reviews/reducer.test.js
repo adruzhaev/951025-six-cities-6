@@ -4,6 +4,7 @@ import {ActionType} from './action';
 import {fetchReviewsList, sendReviewForm} from './api-actions';
 import {APIRoutes} from '../../const';
 import {reducer} from './reducer';
+import {adaptReviewToClient} from '../../services/adapter';
 
 const api = createAPI(() => {});
 
@@ -12,7 +13,7 @@ const review = {
   "comment": `Beautiful space, fantastic location and atmosphere, really a wonderful place to spend a few days. Will be back.`,
 };
 
-export const reviewResponse = {
+export const reviewServerResponse = {
   "id": 2,
   "user": {
     "id": 11,
@@ -25,34 +26,38 @@ export const reviewResponse = {
   "date": `2021-03-14T19:34:29.648Z`
 };
 
-const reviews = [
+const reviewAdapted = adaptReviewToClient(reviewServerResponse);
+
+const reviewsServer = [
   {
     "id": 1,
     "user":
       {
         "id": 18,
-        "isPro": true,
+        "is_pro": true,
         "name": `Sophie`,
         "avatar_url": `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/9.jpg`
       },
     "rating": 2,
     "comment": `Beautiful space, fantastic location and atmosphere, really a wonderful place to spend a few days. Will be back.`,
-    "date": `2021-03-07T08:04:28.647Z`
+    "date": `2021-03-06T21:00:00.000Z`
   },
   {
     "id": 2,
     "user":
     {
       "id": 15,
-      "isPro": false,
+      "is_pro": false,
       "name": `Kendall`,
-      "avatarUrl": `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/6.jpg`
+      "avatar_url": `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/6.jpg`
     },
     "rating": 4,
     "comment": `What an amazing view! The house is stunning and in an amazing location. The large glass wall had an amazing view of the river!`,
-    "date": `2021-03-07T08:04:28.647Z`
+    "date": `2021-03-06T21:00:00.000Z`
   }
 ];
+
+const reviews = reviewsServer.map((item) => adaptReviewToClient(item));
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
@@ -73,7 +78,7 @@ describe(`Async operation should work correctly`, () => {
 
     apiMock
       .onGet(url)
-      .reply(200, reviews);
+      .reply(200, reviewsServer);
 
     return reviewsLoader(dispatch, () => {}, api)
       .then(() => {
@@ -94,14 +99,14 @@ describe(`Async operation should work correctly`, () => {
 
     apiMock
       .onPost(url)
-      .reply(200, [reviews, reviewResponse]);
+      .reply(200, [...reviewsServer, reviewServerResponse]);
 
     return sendReviewLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_REVIEWS,
-          payload: [...reviews, reviewResponse],
+          payload: [...reviews, reviewAdapted],
         });
       });
   });

@@ -1,16 +1,10 @@
 import React from 'react';
 import {render} from '@testing-library/react';
-import {Router} from 'react-router-dom';
-import {createMemoryHistory} from 'history';
-import AuthForm from './auth-form';
+import {AuthForm} from './auth-form';
 
-test(`AuthForm should render correctly`, () => {
-  const history = createMemoryHistory();
+it(`AuthForm should render correctly`, () => {
   const {container} = render(
-      <Router history={history}>
-        <AuthForm />
-      </Router>
+      <AuthForm />
   );
-
   expect(container).toMatchSnapshot();
 });

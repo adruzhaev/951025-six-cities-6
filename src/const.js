@@ -131,3 +131,8 @@ export const BOOK_MARK_CLASSES = {
   MAIN: `place-card__`,
   OFFER: `property__`
 };
+
+export const REVIEWS_TO_SHOW = {
+  MIN: 0,
+  MAX: 10,
+};

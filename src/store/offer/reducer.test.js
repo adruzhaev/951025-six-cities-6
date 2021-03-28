@@ -3,8 +3,9 @@ import {ActionType} from './action';
 import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '../../services/api';
 import {CITIES, SortingTypes, OfferStatus, APIRoutes} from '../../const';
-import {offerAdapted, offerServer, offers} from './test-mocks';
+import {offerServer, offersServer} from './test-mocks';
 import {fetchOffersList, fetchOffer, fetchOffersNearby} from './api-actions';
+import {adaptOfferToClient} from '../../services/adapter';
 
 const api = createAPI(() => {});
 describe(`Reducers work correctly`, () => {
@@ -22,6 +23,9 @@ describe(`Reducers work correctly`, () => {
   });
 });
 
+const offerAdapted = adaptOfferToClient(offerServer);
+const offersAdapted = offersServer.map((item) => adaptOfferToClient(item));
+
 describe(`Async operation work correctly`, () => {
   it(`Should make a correct API call to fetch offer`, () => {
     const apiMock = new MockAdapter(api);
@@ -37,10 +41,9 @@ describe(`Async operation work correctly`, () => {
     return offerDetailsLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
-
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_OFFER,
-          payload: offerServer
+          payload: offerAdapted
         });
       });
   });
@@ -55,7 +58,7 @@ describe(`Async operation work correctly`, () => {
 
     apiMock
       .onGet(url)
-      .reply(200, offers);
+      .reply(200, offersServer);
 
     return offersListLoader(dispatch, () => {}, api)
       .then(() => {
@@ -63,7 +66,7 @@ describe(`Async operation work correctly`, () => {
 
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_OFFERS,
-          payload: offers
+          payload: offersAdapted
         });
       });
   });
@@ -78,15 +81,15 @@ describe(`Async operation work correctly`, () => {
 
     apiMock
       .onGet(url)
-      .reply(200, offerServer);
+      .reply(200, offersServer);
 
     return nearbyOffersLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
 
         expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.LOAD_NEARBY,
-          payload: offerAdapted
+          type: ActionType.LOAD_OFFERS_NEARBY,
+          payload: offersAdapted
         });
       });
   });
