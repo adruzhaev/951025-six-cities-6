@@ -4,6 +4,8 @@ import {ActionType} from './action';
 import {fetchFavoriteOffersList} from './api-actions';
 import {APIRoutes} from '../../const';
 import {reducer} from './reducer';
+import {offersServer} from '../offer/test-mocks';
+import {adaptOfferToClient} from '../../services/adapter';
 
 const api = createAPI(() => {});
 
@@ -62,116 +64,7 @@ const favoriteOffer = {
   "maxAdults": 1
 };
 
-const favoriteOffers = [
-  {
-    city: {
-      name: `Paris`,
-      location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
-        zoom: 13
-      }
-    },
-    images: [
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/7.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/8.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/5.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/9.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/19.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/18.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/4.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/20.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/6.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/13.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/11.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/2.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/12.jpg`
-    ],
-    title: `The house among olive `,
-    rating: 3,
-    type: `room`,
-    bedrooms: 1,
-    price: 169,
-    goods: [
-      `Breakfast`,
-      `Air conditioning`,
-      `Laptop friendly workspace`,
-      `Washer`
-    ],
-    host: {
-      "id": 25,
-      "name": `Angelina`,
-      "is_pro": true,
-      "avatarUrl": `img/avatar-angelina.jpg`
-    },
-    description: `Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.`,
-    location: {
-      latitude: 48.83861,
-      longitude: 2.350499,
-      zoom: 16
-    },
-    id: 1,
-    isPremium: true,
-    isFavorite: true,
-    previewImage: `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg`,
-    maxAdults: 1
-  },
-  {
-    city: {
-      name: `Paris`,
-      location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
-        zoom: 13
-      }
-    },
-    images: [
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/4.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/9.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/14.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/15.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/17.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/2.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/3.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/10.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/8.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/6.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/13.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/12.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/5.jpg`,
-      `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg`
-    ],
-    title: `Waterfront with extraordinary view`,
-    rating: 3.7,
-    type: `room`,
-    bedrooms: 1,
-    price: 299,
-    goods: [
-      `Washer`,
-      `Laptop friendly workspace`,
-      `Breakfast`
-    ],
-    host: {
-      "id": 25,
-      "name": `Angelina`,
-      "is_pro": true,
-      "avatarUrl": `img/avatar-angelina.jpg`
-    },
-    description: `Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.`,
-    location: {
-      latitude: 48.87961000000001,
-      longitude: 2.353499,
-      zoom: 16
-    },
-    id: 19,
-    isPremium: true,
-    isFavorite: true,
-    previewImage: `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/6.jpg`,
-    maxAdults: 2
-  },
-];
-
+const offersAdapted = offersServer.map((item) => adaptOfferToClient(item));
 
 describe(`Reducer should work correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
@@ -246,14 +139,14 @@ describe(`Async operation should work correctly`, () => {
 
     apiMock
       .onGet(APIRoutes.FAVORITES)
-      .reply(200, favoriteOffers);
+      .reply(200, offersServer);
 
     return favoritesLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalled(1);
+        expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_FAVORITES,
-          payload: favoriteOffers,
+          payload: offersAdapted,
         });
       });
   });

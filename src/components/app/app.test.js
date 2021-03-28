@@ -7,10 +7,11 @@ import configureStore from 'redux-mock-store';
 import App from './app';
 import {AuthorizationStatus, CITIES, OfferStatus} from '../../const';
 import {NameSpace} from '../../store/reducer';
-import {offers, offerAdapted} from '../../store/offer/test-mocks';
+import {offersServer, offerServer} from '../../store/offer/test-mocks';
+import {adaptOfferToClient} from '../../services/adapter';
 
 const mockStore = configureStore({});
-
+const offersAdapted = offersServer.map((item) => adaptOfferToClient(item));
 describe(`Test routing`, () => {
   it(`Render 'MainPage' when user navigates to '/' url`, async () => {
 
@@ -76,7 +77,7 @@ describe(`Test routing`, () => {
         isDataLoaded: true
       },
       [NameSpace.FAVORITES]: {
-        offers,
+        offers: offersAdapted,
         isDataLoaded: true
       }
     });
@@ -106,7 +107,7 @@ describe(`Test routing`, () => {
       },
       [NameSpace.OFFER]: {
         offers: [],
-        offer: offerAdapted,
+        offer: adaptOfferToClient(offerServer),
         offersNearby: [],
         isDataLoaded: true,
         notFoundOffer: OfferStatus.FOUND

@@ -106,7 +106,7 @@ export const offersServer = [
     "is_premium": true,
     "is_favorite": false,
     "preview_image": `https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg`,
-    "maxAdults": 1
+    "max_adults": 1
   },
   {
     "city": {

@@ -53,7 +53,7 @@ const AuthForm = ({onSubmit}) => {
 };
 
 AuthForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func
 };
 
 const mapDispatchToProps = (dispatch) => ({

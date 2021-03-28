@@ -7,7 +7,8 @@ import {createMemoryHistory} from 'history';
 import {AuthorizationStatus} from '../../const';
 import {NameSpace} from '../../store/reducer';
 import BookmarkButton from './bookmark-button';
-import {offerAdapted} from '../../store/offer/test-mocks';
+import {offerServer} from '../../store/offer/test-mocks';
+import {adaptOfferToClient} from '../../services/adapter';
 
 const mockStore = configureStore();
 
@@ -21,7 +22,7 @@ it(`BookmarkButton should render correctly`, () => {
         }
       })}>
         <Router history={history}>
-          <BookmarkButton offer={offerAdapted} />
+          <BookmarkButton offer={adaptOfferToClient(offerServer)} />
         </Router>
       </Provider>
   );
