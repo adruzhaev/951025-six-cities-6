@@ -4,13 +4,14 @@ import {connect} from 'react-redux';
 import {RATING, MIN_COMMENTS_CHARS, MAX_COMMENTS_CHARS} from '../../const';
 import {sendReviewForm} from '../../store/reviews/api-actions.js';
 
+const initialComment = {
+  'rating': null,
+  'comment': ``,
+};
+
 const ReviewForm = ({id, onSubmit}) => {
 
   const [disabled, setDisabled] = useState(true);
-  const initialComment = {
-    'rating': 0,
-    'comment': ``,
-  };
   const [commentForm, setCommentForm] = useState(initialComment);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const ReviewForm = ({id, onSubmit}) => {
       || commentForm.comment.length < MIN_COMMENTS_CHARS
       || commentForm.comment.length > MAX_COMMENTS_CHARS
     );
-  });
+  }, [commentForm]);
 
   const handleFieldChange = (evt) => {
     const {name, value} = evt.target;
@@ -28,9 +29,7 @@ const ReviewForm = ({id, onSubmit}) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     onSubmit({id, review: commentForm});
-    setCommentForm({...commentForm, ...initialComment});
-    evt.target.reset();
-    setDisabled(true);
+    setCommentForm({...initialComment});
   };
 
   return (
@@ -46,6 +45,7 @@ const ReviewForm = ({id, onSubmit}) => {
               id={`${value}-stars`}
               type="radio"
               onChange={handleFieldChange}
+              checked={value === +commentForm.rating}
             />
             <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={title}>
               <svg className="form__star-image" width={37} height={33}>
@@ -62,6 +62,7 @@ const ReviewForm = ({id, onSubmit}) => {
         name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleFieldChange}
+        value={commentForm.comment}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -79,8 +80,8 @@ ReviewForm.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit({id, review, element}) {
-    dispatch(sendReviewForm({id, review, element}));
+  onSubmit({id, review}) {
+    dispatch(sendReviewForm({id, review}));
   }
 });
 

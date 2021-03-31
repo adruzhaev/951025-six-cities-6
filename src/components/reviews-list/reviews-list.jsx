@@ -10,7 +10,7 @@ const ReviewsList = ({reviews}) => {
     <>
       <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.slice(REVIEWS_TO_SHOW.MIN, REVIEWS_TO_SHOW.MAX).length}</span></h2>
       <ul className="reviews__list">
-        {reviews.sort((a, b) => b.id - a.id).slice(REVIEWS_TO_SHOW.MIN, REVIEWS_TO_SHOW.MAX).map((review) => (
+        {reviews.slice(REVIEWS_TO_SHOW.MIN, REVIEWS_TO_SHOW.MAX).map((review) => (
           <ReviewItem key={review.id} review={review}/>
         ))}
       </ul>

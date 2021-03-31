@@ -14,14 +14,14 @@ import {getActiveCity, getLoadDataStatus, getSortedOffers} from '../../store/off
 
 const MainPage = ({activeCity, offers, isDataLoaded, onLoadData}) => {
 
-  const [offerCardId, setofferCardId] = useState(null);
+  const [offerCardId, setOfferCardId] = useState(null);
 
   const handleMouseOver = useCallback((evt) => {
-    setofferCardId(evt.currentTarget.dataset.id);
+    setOfferCardId(evt.currentTarget.dataset.id);
   }, []);
 
   const handleMouseLeave = useCallback(() => {
-    setofferCardId(null);
+    setOfferCardId(null);
   }, []);
 
   useEffect(() => {
