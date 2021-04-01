@@ -16,13 +16,6 @@ const FavouritePlacesPage = ({offers, onLoadFavorites, isDataLoaded}) => {
     onLoadFavorites();
   }, []);
 
-  const citiesOffers = offers.reduce((acc, currentCity) => {
-    const city = currentCity.city.name;
-    acc[city] = acc[city] ? [...acc[city], currentCity] : [currentCity];
-
-    return acc;
-  }, {});
-
   return (
     !isDataLoaded ?
       <LoadingPage />
@@ -35,7 +28,7 @@ const FavouritePlacesPage = ({offers, onLoadFavorites, isDataLoaded}) => {
               <section className="favorites">
                 <h1 className="favorites__title">Saved listing</h1>
                 <ul className="favorites__list">
-                  {Object.entries(citiesOffers).map(([city, offersCity]) => {
+                  {Object.entries(offers).map(([city, offersCity]) => {
                     return (
                       <li className="favorites__locations-items" key={city}>
                         <div className="favorites__locations locations locations--current">

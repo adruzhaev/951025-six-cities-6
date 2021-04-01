@@ -20,5 +20,5 @@ export const fetchOffer = (id) => (dispatch, _getState, api) => {
 export const fetchOffersNearby = (id) => (dispatch, _getState, api) => {
   return api.get(APIRoutes.OFFERS + `/` + id + `/nearby`)
     .then(({data}) => dispatch(loadOffersNearby(data.map((item) => adaptOfferToClient(item)))))
-    .catch(() => {});
+    .catch();
 };
