@@ -45,7 +45,7 @@ const ReviewForm = ({id, onSubmit}) => {
               id={`${value}-stars`}
               type="radio"
               onChange={handleFieldChange}
-              checked={value === +commentForm.rating}
+              checked={value === parseInt(commentForm.rating, 10)}
             />
             <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={title}>
               <svg className="form__star-image" width={37} height={33}>
