@@ -6,6 +6,7 @@ export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoutes.LOGIN)
     .then(({data}) => dispatch(setAuthorization(data)))
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+    .catch(() => {})
 );
 
 export const login = ({email, password}) => (dispatch, _getState, api) => (
@@ -13,10 +14,12 @@ export const login = ({email, password}) => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(setAuthorization(data)))
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
     .then(() => dispatch(redirectToRoute(AppRoutes.MAIN)))
+    .catch(() => {})
 );
 
 export const logout = () => (dispatch, _getState, api) => {
   api.get(APIRoutes.logout)
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)))
-    .then(() => dispatch(setAuthorization({})));
+    .then(() => dispatch(setAuthorization({})))
+    .catch(() => {});
 };
