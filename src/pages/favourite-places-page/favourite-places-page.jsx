@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getFavoriteOffers, getDataLoadedStatus} from '../../store/favorites/selectors.js';
-import {offerPropTypes} from '../../prop-types';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import PlaceCardComponent from '../../components/place-card';
@@ -41,7 +40,7 @@ const FavouritePlacesPage = ({offers, onLoadFavorites, isDataLoaded}) => {
                         <div className="favorites__places">
                           {offersCity.map((offer) => {
                             return (
-                              <PlaceCardComponent key={offer.id} offer={offer} isFavorite />
+                              <PlaceCardComponent key={offer.id} offer={offer} isFavorite width={150} height={110} />
                             );
                           })}
                         </div>
@@ -58,7 +57,7 @@ const FavouritePlacesPage = ({offers, onLoadFavorites, isDataLoaded}) => {
 };
 
 FavouritePlacesPage.propTypes = {
-  offers: PropTypes.arrayOf(offerPropTypes),
+  offers: PropTypes.object,
   onLoadFavorites: PropTypes.func,
   isDataLoaded: PropTypes.bool,
 };

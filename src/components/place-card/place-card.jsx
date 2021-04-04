@@ -5,7 +5,7 @@ import BookmarkButton from '../bookmark-button';
 import {capitalize} from '../../utils';
 import {BOOK_MARK_ICON, BOOK_MARK_CLASSES} from '../../const';
 
-const PlaceCard = ({isFavoriteCard = false, isNearest = false, offer, handleOnCardMouseOver, handleCardMouseOut}) => {
+const PlaceCard = ({isFavoriteCard = false, isNearest = false, offer, handleOnCardMouseOver, handleCardMouseOut, width, height}) => {
 
   const {isPremium, previewImage, price, rating, title, type, id} = offer;
 
@@ -22,6 +22,14 @@ const PlaceCard = ({isFavoriteCard = false, isNearest = false, offer, handleOnCa
     return `cities__place-card`;
   };
 
+  const getPlaceCardImageWrapperClass = () => {
+    if (isFavoriteCard) {
+      return `favorites__image-wrapper`;
+    }
+
+    return `cities__image-wrapper`;
+  };
+
   return (
     <article className={`place-card ${getPlaceCardClass()}`} data-id={id} onMouseEnter={handleOnCardMouseOver} onMouseLeave={handleCardMouseOut}>
 
@@ -29,9 +37,9 @@ const PlaceCard = ({isFavoriteCard = false, isNearest = false, offer, handleOnCa
         <span>Premium</span>
       </div>}
 
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`place-card__image-wrapper ${getPlaceCardImageWrapperClass()}`}>
         <Link to={`/offer/${id}`}>
-          <img className="place-card__image" src={previewImage} width={260} height={200} alt="Place image" />
+          <img className="place-card__image" src={previewImage} width={width} height={height} alt="Place image" />
         </Link>
       </div>
       <div className="place-card__info">
@@ -65,7 +73,9 @@ PlaceCard.propTypes = {
   offer: PropTypes.object.isRequired,
   id: PropTypes.string,
   handleOnCardMouseOver: PropTypes.func,
-  handleCardMouseOut: PropTypes.func
+  handleCardMouseOut: PropTypes.func,
+  width: PropTypes.number,
+  height: PropTypes.number,
 };
 
 export default PlaceCard;
