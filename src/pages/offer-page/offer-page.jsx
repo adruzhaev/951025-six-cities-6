@@ -69,6 +69,8 @@ const OfferPage = ({offersNearby, offer, reviews, onLoadOffer, notFoundOffer, au
                     key={item.id}
                     isNearest
                     offer={item}
+                    width={260}
+                    height={200}
                   />
                 ))}
 

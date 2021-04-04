@@ -26,6 +26,8 @@ const OffersList = ({offers, handleOnCardMouseOver, handleCardMouseOut}) => {
         offer={offer}
         handleOnCardMouseOver={handleOnCardMouseOver}
         handleCardMouseOut={handleCardMouseOut}
+        width={260}
+        height={200}
       />
     ))}
   </div>);
